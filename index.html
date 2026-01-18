@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Yasser Tech Scientific Calculator</title>
+
+<style>
+:root{
+  --bg:#f2f2f2;
+  --calc:#ffffff;
+  --btn:#e0e0e0;
+  --text:#000;
+  --display:#f9f9f9;
+}
+
+.dark{
+  --bg:#121212;
+  --calc:#1f1f1f;
+  --btn:#333;
+  --text:#fff;
+  --display:#000;
+}
+
+body{
+  margin:0;
+  height:100vh;
+  background:var(--bg);
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-family:Arial;
+}
+
+.calculator{
+  background:var(--calc);
+  width:340px;
+  padding:15px;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+}
+
+.header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:8px;
+}
+
+.header h3{
+  margin:0;
+  font-size:15px;
+  color:var(--text);
+}
+
+.toggle{
+  background:#ff9500;
+  border:none;
+  padding:5px 10px;
+  border-radius:8px;
+  cursor:pointer;
+  color:#fff;
+}
+
+.display{
+  width:100%;
+  height:60px;
+  font-size:24px;
+  text-align:right;
+  padding:10px;
+  border:none;
+  border-radius:10px;
+  background:var(--display);
+  color:#0f0;
+  margin-bottom:10px;
+}
+
+.buttons{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:8px;
+}
+
+button{
+  height:45px;
+  border:none;
+  border-radius:10px;
+  background:var(--btn);
+  color:var(--text);
+  font-size:15px;
+  cursor:pointer;
+}
+
+button:hover{opacity:.8}
+
+.operator{background:#ff9500;color:#fff}
+.equal{background:#34c759;color:#fff;grid-column:span 2}
+.clear{background:#ff3b30;color:#fff}
+
+.footer{
+  text-align:center;
+  font-size:11px;
+  margin-top:8px;
+  color:var(--text);
+}
+</style>
+</head>
+
+<body>
+
+<div class="calculator">
+  <div class="header">
+    <h3>Yasser Tech Scientific Calculator</h3>
+    <button class="toggle" onclick="toggleMode()">🌙/☀️</button>
+  </div>
+
+  <input type="text" id="display" class="display" disabled>
+
+  <div class="buttons">
+    <button onclick="func('sin')">sin</button>
+    <button onclick="func('cos')">cos</button>
+    <button onclick="func('tan')">tan</button>
+    <button onclick="func('log')">log</button>
+    <button onclick="func('ln')">ln</button>
+
+    <button onclick="append('π')">π</button>
+    <button onclick="append('e')">e</button>
+    <button onclick="append('**')">xʸ</button>
+    <button onclick="sqrt()">√</button>
+    <button onclick="square()">x²</button>
+
+    <button class="clear" onclick="clearDisplay()">C</button>
+    <button onclick="del()">⌫</button>
+    <button class="operator" onclick="append('/')">÷</button>
+    <button class="operator" onclick="append('*')">×</button>
+    <button class="operator" onclick="append('-')">−</button>
+
+    <button onclick="append('7')">7</button>
+    <button onclick="append('8')">8</button>
+    <button onclick="append('9')">9</button>
+    <button class="operator" onclick="append('+')">+</button>
+
+    <button onclick="append('4')">4</button>
+    <button onclick="append('5')">5</button>
+    <button onclick="append('6')">6</button>
+
+    <button onclick="append('1')">1</button>
+    <button onclick="append('2')">2</button>
+    <button onclick="append('3')">3</button>
+
+    <button onclick="append('0')">0</button>
+    <button onclick="append('.')">.</button>
+    <button class="equal" onclick="calculate()">=</button>
+  </div>
+
+  <div class="footer">© 2026 Yasser Tech</div>
+</div>
+
+<script>
+const d=document.getElementById("display");
+
+function append(v){
+  if(v==="π") d.value+="Math.PI";
+  else if(v==="e") d.value+="Math.E";
+  else d.value+=v;
+}
+
+function clearDisplay(){d.value=""}
+function del(){d.value=d.value.slice(0,-1)}
+
+function calculate(){
+  try{d.value=eval(d.value)}
+  catch{d.value="Error"}
+}
+
+function func(f){
+  let x=eval(d.value);
+  if(f==="sin") d.value=Math.sin(x);
+  if(f==="cos") d.value=Math.cos(x);
+  if(f==="tan") d.value=Math.tan(x);
+  if(f==="log") d.value=Math.log10(x);
+  if(f==="ln") d.value=Math.log(x);
+}
+
+function sqrt(){d.value=Math.sqrt(eval(d.value))}
+function square(){d.value=Math.pow(eval(d.value),2)}
+
+function toggleMode(){
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
